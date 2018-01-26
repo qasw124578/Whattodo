@@ -94,7 +94,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <div class="w3-bar w3-border flex flex-align-center" style="width:88%;margin-top:100px;margin-left:6%;margin-right:6%;">
 <div class="color-ccc w3-bar-item w3-button" style="width:20%;">추천 코스</div>
 <div class="w3-button" style="width:20%;">관광지</div>
-<div class="w3-button" style="width:20%;">식당</div>
+<div onclick="movePage(this)" id="goEat" class="w3-button" style="width:20%;">식당</div>
 <div class="w3-button" style="width:20%;">다른 코스</div>
 <div class="w3-button" style="width:20%;">유저 코스</div>
 </div>
@@ -115,6 +115,15 @@ function w3_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 
+// 메뉴바 클릭
+function movePage(obj) {
+	var group = $(obj).attr("id");
+	if (group == "goEat")
+		group="식당";
+	location.href = "restaurant.do?location=서초&theme=한식&group=" + group;
+}
+
+// 날씨 받아오기
 function getWeather() {
 	$.ajax({
 		url: "http://api.openweathermap.org/data/2.5/weather",
@@ -133,8 +142,29 @@ function getWeather() {
 			*/
 			$("#tState").text(Math.round((data.main.temp - 273)*10)/10);
 			$("#wState").text(data.weather[0].main);
-			$("#wIcon").html("<div class='flex flex-align-center flex-justify-center w3-circle w3-light-grey' style='overflow:hidden;'>"
-			 + "<img src='http://openweathermap.org/img/w/"+data.weather[0].icon+".png' /></div>");
+			
+			var icon = data.weather[0].icon;
+			
+			
+			if (icon=="01d" || icon=="01n" || icon=="02d" || icon=="02n") {
+				//맑음
+				icon = "wi-day-sunny";
+			} else if (icon=="03d" || icon=="03n" || icon=="04d" || icon=="04n" || icon=="11d" || icon=="11n") {
+				//구름
+				icon = "wi-cloudy";
+			} else if (icon=="09d" || icon=="09n" || icon=="10d" || icon=="10n") {
+				//비
+				icon = "wi-rain";
+			} else if (icon=="13d" || icon=="13n") {
+				//눈
+				icon = "wi-snowflake-cold";
+			} else {
+				//안개
+				icon = "wi-fog";
+			}
+			
+			$("#wIcon").html("<i class='w3-cell-middle w3-right w3-text-white right-margin wi " + icon + "' style='font-size:2em'></i>");
+
 			alert(data.main.temp - 273);
 		},
 		error: function(data) {

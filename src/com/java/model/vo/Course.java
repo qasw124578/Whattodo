@@ -1,6 +1,6 @@
 package com.java.model.vo;
 
-public class CourseVO {
+public class Course {
 	private String code;
 	private String name;
 	private String contents;
@@ -8,7 +8,7 @@ public class CourseVO {
 	private String theme;
 	private String weather;
 	private String goo;
-	private String good;
+	private int good;
 
 	public String getCode() {
 		return code;
@@ -66,11 +66,11 @@ public class CourseVO {
 		this.goo = goo;
 	}
 
-	public String getGood() {
+	public int getGood() {
 		return good;
 	}
 
-	public void setGood(String good) {
+	public void setGood(int good) {
 		this.good = good;
 	}
 

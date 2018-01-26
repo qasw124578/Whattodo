@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.java.model.vo.CourseVO;
+import com.java.model.vo.Course;
 import com.java.model.vo.Restaurant;
 import com.java.util.DBUtil;
 
@@ -16,21 +16,33 @@ public class CourseDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public CourseVO getCourseInfo(String courseCode) {
+	public Course getCourseInfo(String courseCode) {
 		String sql = "SELECT * FROM COURSE WHERE CODE = ?";
+		Course course = null;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, courseCode);
 			
+			if (rs.next()) {
+				course = new Course();
+				course.setCode(courseCode);
+				course.setName(rs.getString("name"));
+				course.setContents(rs.getString("contents"));
+				course.setGoo(rs.getString("goo"));
+				course.setGood(rs.getInt("good"));
+				course.setId(rs.getString("id"));
+				course.setTheme(rs.getString("theme"));
+				course.setWeather(rs.getString("weather"));
+			}
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 		
-		return null;
+		return course;
 		
 	}
 	
