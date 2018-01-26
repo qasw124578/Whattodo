@@ -27,8 +27,8 @@ public class RestaurantServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");		
 		String theme = request.getParameter("theme");
 		String location = request.getParameter("location");
-		String place = request.getParameter("place");
-		
+		String place = request.getParameter("group");
+		System.out.println(theme + location + place);
 		ArrayList<Restaurant> list = restaurantDao.restaurantView(location, theme, place);
 		
 		request.setAttribute("restList", list);

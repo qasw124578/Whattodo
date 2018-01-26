@@ -26,7 +26,7 @@
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=83Xkfwn4qaUTBwYcbhDn"></script>
 </head>
 <body>
-	<div>${obj }</div>
+	 <div>${obj }</div>
 	<div class="w3-container">
 		<table class="w3-table w3-striped w3-margin" style="width: 80%">
 			<tr>
@@ -45,7 +45,7 @@
 				<div class="panel-heading" style="background-color:#672E3B">
 					<h4 class="panel-title">
 						<a style="color:#ffffff" data-toggle="collapse" data-parent="#accordion"
-							onclick="getMap(this);" href="#collapse${item.code}" >${item.name}</a>
+							href="#collapse${item.code}" >${item.name}</a>
 					</h4>
 				</div>
 				<div id="collapse${item.code}" class="panel-collapse collapse">
@@ -55,7 +55,7 @@
 							<img src="http://post.phinf.naver.net/20150514_144/umph112_1431595096294McQLs_JPEG/mug_obj_143159509680481827.jpg"
 								class="w3-round-large" style="width:100%; height:auto;" alt="img1">
 						</div>
-						<div id="map${item.code}" style="display: inline-block;  width: 30%; height: 300px; margin: 10px;"></div>
+						<div id="map" style="width:50%;height:400px;"></div>
 					</div>
 					<h2> ${item.name} </h2>
 					<p> ${item.explain} </p>
@@ -68,32 +68,16 @@
 
 
 <script type="text/javascript">
-function getMap(panel_id) {
-    var mapOptions = new naver.maps.LatLng(37.5010226, 127.0396037);
-/*     var map = new naver.maps.Map('map'); */ 
-    var map = new naver.maps.Map(panel_id); 
- 
-	
-	var locationList = [];
-	/* <c:forEach items="${restList}" var="location">
-	locationList.push({"latitude":"${location.latitude}","longitude":"${location.longitude}"}); 
-	</c:forEach>
-	 */
-	    
-	var position = new naver.maps.LatLng(locationList[i].latitude,locationList[i].longitude);
-	/* alert(position); */
-	var markerOptions = {
-	    "position": position,
-	    "icon": {
-	        url: 'http://static.naver.net/maps/v3/pin_default.png',
-	        size: new naver.maps.Size(22, 35),
-	        anchor: new naver.maps.Point(11, 35)
-	    }
-	};
-	
-	var marker = new naver.maps.Marker(markerOptions);
-	marker.setMap(map); // 추가
-}
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+});
+
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(restList.latitude, resList.longitude),
+    map: map
+});
+
 		
 </script>
 </body>
