@@ -48,8 +48,8 @@
 				</div>
 			</div>
 
-			<div class="flex flex-justify-between">
-				<div class="w3-card-4" style="width: 24%">
+			<div class="flex flex-justify-between flex-wrap">
+				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
 					<div class="no-padding w3-opacity w3-hover-opacity-off"
 						data-toggle="modal" data-target="#myModal"
 						style="height: 200px; overflow: hidden">
@@ -61,7 +61,7 @@
 				</div>
 				
 <!-- Çã¼ö---------------------------------------------------------------------------------------- -->
-				<div class="w3-card-4" style="width: 24%">
+				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
 					<div class="no-padding w3-opacity w3-hover-opacity-off"
 						data-toggle="modal" data-target="#myModal"
 						style="height: 200px; overflow: hidden">
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 				
-				<div class="w3-card-4" style="width: 24%">
+				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
 					<div class="no-padding w3-opacity w3-hover-opacity-off"
 						data-toggle="modal" data-target="#myModal"
 						style="height: 200px; overflow: hidden">
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				
-				<div class="w3-card-4" style="width: 24%">
+				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
 					<div class="no-padding w3-opacity w3-hover-opacity-off"
 						data-toggle="modal" data-target="#myModal"
 						style="height: 200px; overflow: hidden">

@@ -45,13 +45,16 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 .flex-align-center{align-items:center;}
 .flex-justify-center{justify-content:center;}
 .flex-justify-between{justify-content:space-between;}
+.flex-wrap{flex-wrap:wrap;}
 
-.1rem {font-size: 1em;}
-.05rem {font-size: 0.5em;}
-.07rem {font-size: 0.7em;}
+.1em {font-size: 1em;}
+.05em {font-size: 0.5em;}
+.07em {font-size: 0.7em;}
 
 .color-ccc {background-color: #ccc;}
 .padding-bot{padding-bottom: 24px!important;}
+.height-100{height:100%;}
+.width-100{widht:100%;}
 </style>
 
 <!-- Sidebar/menu -->
@@ -69,11 +72,11 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 	<span class="flex-grow"></span>
 	
   	<div id="wIcon" class="right-margin-small">
-  	<i onclick="getWeather();" class="w3-cell-middle w3-right w3-text-white right-margin wi wi-day-sunny" style="font-size:2rem"></i>
+  	<i onclick="getWeather();" class="w3-cell-middle w3-right w3-text-white right-margin wi wi-day-sunny" style="font-size:2em"></i>
   	</div>
   	<span id="wState" class="w3-cell-middle w3-right w3-text-white right-margin">Winter</span>
   	<div class="right-margin-small">
-  		<i class="w3-cell-middle w3-right w3-text-white right-margin wi wi-thermometer" style="font-size:2rem"></i>
+  		<i class="w3-cell-middle w3-right w3-text-white right-margin wi wi-thermometer" style="font-size:1.7em"></i>
   	</div>
   	<span id="tState" class="w3-cell-middle w3-right w3-text-white right-margin">-36.5</span>
   	
@@ -84,7 +87,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   	</select>
   	
   	<a href="javascript:void(0)" class="w3-cell-middle w3-right bg-tawny-port" onclick="w3_open()">
-  		<i class="w3-cell-middle w3-right w3-text-white right-margin fa fa-user" style="font-size:2.5rem"></i>
+  		<i class="w3-cell-middle w3-right w3-text-white right-margin fa fa-user" style="font-size:2.5em"></i>
   	</a>
 </header>
 
