@@ -93,8 +93,8 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <div class="w3-bar w3-border flex flex-align-center" style="width:88%;margin-top:100px;margin-left:6%;margin-right:6%;">
 <div class="color-ccc w3-bar-item w3-button" style="width:20%;">추천 코스</div>
-<div class="w3-button" style="width:20%;">관광지</div>
-<div onclick="movePage(this)" id="goEat" class="w3-button" style="width:20%;">식당</div>
+<div onclick="movePage(this)" id="P" class="w3-button" style="width:20%;">관광지</div>
+<div onclick="movePage(this)" id="R" class="w3-button" style="width:20%;">식당</div>
 <div class="w3-button" style="width:20%;">다른 코스</div>
 <div class="w3-button" style="width:20%;">유저 코스</div>
 </div>
@@ -118,9 +118,9 @@ function w3_close() {
 // 메뉴바 클릭
 function movePage(obj) {
 	var group = $(obj).attr("id");
-	if (group == "goEat")
-		group="식당";
-	location.href = "restaurant.do?location=서초&theme=한식&group=" + group;
+	location.href = "restaurant.do?location="
+			+ encodeURI("서초", "UTF-8") + "&theme="
+			+ encodeURI("한식", "UTF-8") + "&group=" + group;
 }
 
 // 날씨 받아오기

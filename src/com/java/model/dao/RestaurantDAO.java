@@ -30,11 +30,7 @@ public class RestaurantDAO {
 		PreparedStatement stmt = null; //연결 통로 변수
 		ResultSet rs = null;  //0단계 : 매개변수를 만들었다고 생각하면되
 		String param;
-		if(place.equals("식당")){
-			place = "R";
-		}else if(place.equals("관광지")){
-			place = "P";
-		}
+		
 		String sql = "select * from PLACE "
 				+ "where theme = ? and address like '%" + location  + "%' and "
 						+ "code like '" +place+ "%'";  
