@@ -67,7 +67,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top bg-tawny-port w3-padding-16 flex flex-align-center">
-	<span class="logo w3-cell-middle w3-text-white w3-left w3-allerta">WhatTODO</span>
+	<span class="logo w3-cell-middle w3-text-white w3-left w3-allerta">오늘 뭐하세요?</span>
 	
 	<span class="flex-grow"></span>
 	

@@ -14,6 +14,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!--지도 생성과정  -->
+<!-- prevent IE6 flickering -->
+<script type="text/javascript">
+        try {
+            document.execCommand('BackgroundImageCache', false, true);
+        } catch (e) {
+        }
+    </script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=83Xkfwn4qaUTBwYcbhDn">
+</script>
+
 </head>
 
 <body>
@@ -24,7 +38,8 @@
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-container" style="max-width: 1600px; margin-top: 20px; margin-bottom:20px;">
 		<div style="width: 90%; margin: auto;">
-		<h1><b>오늘의 추천 코스</b></h1>
+		<h2><b>오늘의 추천 코스:</b> ${course.name }</h2>
+		<h5 style="margin-left:1%;">${course.contents }</h5>
 			<div class="w3-border w3-round-small " style="width: 100%; height: auto; margin-bottom:3%; overflow: hidden">
 				<div class="flex w3-padding-large">
 					<div class="flex flex-grow">
@@ -45,12 +60,21 @@
 			  		</div>
   				</div>
 				<div class="w3-padding-large padding-bot">
-					<img style="width:100%;" src="http://cfile8.uf.tistory.com/image/2309CC3758D4F80A283284" />
+					
+					
+					
+					<div id="map" style="width:100%;height:400px;"></div>
+				
+				
+				
 				</div>
 			</div>
 			
 			<div class="flex flex-justify-between flex-wrap">
+			
 			<c:forEach var="detail" items="${detailList }">
+			
+				
 
 				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
 					<div class="w3-padding-small w3-opacity w3-hover-opacity-off"
@@ -95,5 +119,19 @@
 	<!-- Footer -->
 	<jsp:include page="footer.jsp" />
 	 --%>
+<script type="text/javascript">
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(${location.latitude}, ${location.longitude}),
+    zoom: 10
+});
+</script>
+<c:forEach var="loc" items="${detailList }">
+<script>
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(${loc.latitude}, ${loc.longitude}),
+    map: map
+});
+</script>
+</c:forEach>
 </body>
 </html>
