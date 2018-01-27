@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.java.model.dao.CourseDAO2;
 import com.java.model.vo.Course;
+import com.java.model.vo.Restaurant;
 
 /**
  * Servlet implementation class CourseServlet
@@ -28,7 +29,7 @@ public class CourseServlet extends HttpServlet {
 			String goo = request.getParameter("goo");
 			System.out.println(theme + goo);
 			
-			ArrayList<Course> list = courseDAO.courseView(theme, goo);
+			ArrayList<ArrayList<Restaurant>> list = courseDAO.courseView(theme, goo);
 			
 			request.setAttribute("courseList", list);
 			request.getRequestDispatcher("Course.jsp").forward(request, response);

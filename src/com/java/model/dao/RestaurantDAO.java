@@ -28,13 +28,20 @@ public class RestaurantDAO {
 		
 		String sql = "select * from PLACE "
 				+ "where theme = ? and address like '%" + location  + "%' and "
-						+ "code like '" +place+ "%'";  
+						+ "code like '" +place+ "%'";
+		if (theme == null) {
+			sql = "select * from PLACE "
+					+ "where address like '%" + location  + "%' and "
+							+ "code like '" +place+ "%'";
+		}
 		// '%?%'
 		try {
 			
 			conn = DBUtil.getConnection();
 			stmt = conn.prepareStatement(sql); // prepared는 실행 전에 퀴리문 전달
-			stmt.setString(1, theme);
+			if (theme != null) {
+				stmt.setString(1, theme);
+			}
 			rs = stmt.executeQuery(); //rs로 출력물의 참조값을 가리키고 있다. sql변수를 쿼리문으로 선언 / rs는 결과집합을 포인팅 할 수 있는 역할을 한다. / executeQuery() select 문이라고 생각하면 됨
 										// preparedStatement눈 Statement의 상속을 받은 것
 			
