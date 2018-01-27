@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.java.model.vo.Restaurant;
+import com.java.model.vo.Course;
 import com.java.util.DBUtil;
 
-public class RestaurantDAO {
+public class CourseDAO2 {
 	static{
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -19,36 +19,38 @@ public class RestaurantDAO {
 		}//0단계 :
 	}
 	
-	public ArrayList<Restaurant> restaurantView(String location, String theme, String place){
-		ArrayList<Restaurant> list = new ArrayList<Restaurant>();
+	public ArrayList<Course> courseView(String theme, String goo){
+		ArrayList<Course> list = new ArrayList<Course>();
 		Connection conn = null; //연결 변수
 		PreparedStatement stmt = null; //연결 통로 변수
 		ResultSet rs = null;  //0단계 : 매개변수를 만들었다고 생각하면되
-		String param;
+		//String param;
 		
-		String sql = "select * from PLACE "
-				+ "where theme = ? and address like '%" + location  + "%' and "
-						+ "code like '" +place+ "%'";  
+		/*String sql = "select * from COURSE "
+				+ "where theme = ? and "+ "code like '" +goo+ "%'";  
+		 '%?%'*/
+		String sql = "select * from COURSE "
+				+ "where theme = ? and goo = ?";  
 		// '%?%'
 		try {
 			
 			conn = DBUtil.getConnection();
 			stmt = conn.prepareStatement(sql); // prepared는 실행 전에 퀴리문 전달
 			stmt.setString(1, theme);
+			stmt.setString(2, goo);
 			rs = stmt.executeQuery(); //rs로 출력물의 참조값을 가리키고 있다. sql변수를 쿼리문으로 선언 / rs는 결과집합을 포인팅 할 수 있는 역할을 한다. / executeQuery() select 문이라고 생각하면 됨
 										// preparedStatement눈 Statement의 상속을 받은 것
 			
 			while(rs.next()) {
-				Restaurant obj = new Restaurant();
+				Course obj = new Course();
 				obj.setCode(rs.getString(1));
 				obj.setName(rs.getString(2));
-				obj.setThema(rs.getString(3));
-				obj.setAddress(rs.getString(4));
-				obj.setExplain(rs.getString(5));
-				obj.setLatitude(rs.getDouble(6));
-				obj.setLongitude(rs.getDouble(7));
+				obj.setContents(rs.getString(3));
+				obj.setId(rs.getString(4));
+				obj.setTheme(rs.getString(5));
+				obj.setWeather(rs.getString(6));
+				obj.setGoo(rs.getString(7));
 				obj.setGood(rs.getInt(8));
-				obj.setFile_path(rs.getString(9));
 				list.add(obj);
 			}
 			
@@ -65,5 +67,6 @@ public class RestaurantDAO {
 	
 	
 	}
+
 	
 }

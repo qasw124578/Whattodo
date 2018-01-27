@@ -23,9 +23,13 @@
         }
     </script>
 <script type="text/javascript"
-	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=83Xkfwn4qaUTBwYcbhDn"></script>
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=83Xkfwn4qaUTBwYcbhDn">
+	</script>
 </head>
 <body>
+
+	<!-- Top menu on small screens -->
+	<jsp:include page="header.jsp" />
 	 <div>${obj }</div>
 	<div class="w3-container">
 		<table class="w3-table w3-striped w3-margin" style="width: 80%">
@@ -52,10 +56,24 @@
 					<div class="panel-body" style="display:flex; align-items:center; justify-contents:center;">
 					<!-- <div class="panel-body"> -->
 						<div style="display: inline-block; height:auto; width:30%;">
-							<img src="http://post.phinf.naver.net/20150514_144/umph112_1431595096294McQLs_JPEG/mug_obj_143159509680481827.jpg"
+							<img src="./img/P_image/${item.code}.jpg"
 								class="w3-round-large" style="width:100%; height:auto;" alt="img1">
 						</div>
-						<div id="map" style="width:50%;height:400px;"></div>
+						<div id="map${item.code}" style="width:50%;height:400px;"></div>
+						
+						<!--지도 생성 및 지도 마커 스크립트  -->
+						<script type="text/javascript">
+						var map = new naver.maps.Map('map${item.code}', {
+						    center: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+						    zoom: 10
+						});
+						
+						var marker = new naver.maps.Marker({
+						    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+						    map: map
+						});		
+						</script>
+						
 					</div>
 					<h2> ${item.name} </h2>
 					<p> ${item.explain} </p>
@@ -65,20 +83,8 @@
 
 		</div>
 		</div>
-
-
-<script type="text/javascript">
-var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-});
-
-var marker = new naver.maps.Marker({
-    position: new naver.maps.LatLng(restList.latitude, resList.longitude),
-    map: map
-});
-
-		
-</script>
+	<%-- <!-- Footer -->
+	<jsp:include page="footer.jsp" /> --%>
+	 
 </body>
 </html>
