@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +24,7 @@
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-container" style="max-width: 1600px; margin-top: 20px; margin-bottom:20px;">
 		<div style="width: 90%; margin: auto;">
-		<h1><b>Today's What TODO?</b></h1>
+		<h1><b>오늘의 추천 코스</b></h1>
 			<div class="w3-border w3-round-small " style="width: 100%; height: auto; margin-bottom:3%; overflow: hidden">
 				<div class="flex w3-padding-large">
 					<div class="flex flex-grow">
@@ -47,66 +48,32 @@
 					<img style="width:100%;" src="http://cfile8.uf.tistory.com/image/2309CC3758D4F80A283284" />
 				</div>
 			</div>
-
+			
 			<div class="flex flex-justify-between flex-wrap">
-				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
-					<div class="no-padding w3-opacity w3-hover-opacity-off"
-						data-toggle="modal" data-target="#myModal"
-						style="height: 200px; overflow: hidden">
-						<img src="./img/chige.png" alt="Norway" style="width: 100%">
-					</div>
-					<div class="w3-container w3-center">
-						<p>Korean Food</p>
-					</div>
-				</div>
-				
-<!-- 허수---------------------------------------------------------------------------------------- -->
-				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
-					<div class="no-padding w3-opacity w3-hover-opacity-off"
-						data-toggle="modal" data-target="#myModal"
-						style="height: 200px; overflow: hidden">
-						<img src="./img/chige.png" alt="Norway" style="width: 100%">
-					</div>
-					<div class="w3-container w3-center">
-						<p>Korean Food</p>
-					</div>
-				</div>
-				
-				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
-					<div class="no-padding w3-opacity w3-hover-opacity-off"
-						data-toggle="modal" data-target="#myModal"
-						style="height: 200px; overflow: hidden">
-						<img src="./img/chige.png" alt="Norway" style="width: 100%">
-					</div>
-					<div class="w3-container w3-center">
-						<p>Korean Food</p>
-					</div>
-				</div>
-				
-				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
-					<div class="no-padding w3-opacity w3-hover-opacity-off"
-						data-toggle="modal" data-target="#myModal"
-						style="height: 200px; overflow: hidden">
-						<img src="./img/chige.png" alt="Norway" style="width: 100%">
-					</div>
-					<div class="w3-container w3-center">
-						<p>Korean Food</p>
-					</div>
-				</div>
-<!-- 허수---------------------------------------------------------------------------------------- -->
+			<c:forEach var="detail" items="${detailList }">
 
+				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
+					<div class="w3-padding-small w3-opacity w3-hover-opacity-off"
+						data-toggle="modal" data-target="#myModal${detail.code }"
+						style="height: 160px; overflow: hidden">
+						<img src="./img/P_image/${detail.code }.jpg" class="w3-round" style="width: 100%">
+					</div>
+					<div class="w3-container w3-center flex flex-align-center flex-justify-center" style="height:50px;">
+						${detail.name }
+					</div>
+				</div>
 				<!-- Modal -->
-				<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal fade" id="myModal${detail.code }" role="dialog">
 					<div class="modal-dialog">
 
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Korean Food</h4>
+								<h4 class="modal-title">${detail.name }</h4>
 							</div>
 							<div class="modal-body">
-								<p>Some text in the modal.</p>
+								<p>${detail.explain }</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
@@ -117,6 +84,7 @@
 					</div>
 				</div>
 
+			</c:forEach>
 
 			</div>
 
