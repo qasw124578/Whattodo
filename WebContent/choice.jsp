@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -47,14 +46,14 @@ body {
 	<h2 class="w3-wide w3-center" id="first">서울 인프라 및 사업장<h2>
 	<div class="w3-container w3-content w3-padding-64 flex flex-justify-between flex-align-center" id="contact" style="width:80%; height:400px; margin:auto" >
 		<div class="w3-card-4 w3-opacity w3-hover-opacity-off" style="width:30%; height:250px;">
-		<a target="_blank" href="img_mapo.jpg">
+		<a href="/whattodo/recommend.do?location=mapo">
 		    <img src="https://image.samsungsds.com/global/ko/images/img/korea/img_office3.jpg?queryString=20171211104617" alt="Norway" style="width:100%">
 		    <div class="w3-container w3-center"style="color:black">
 		      <h4><p>MAPO</p></h4>
 		    </div></a>
 	  	</div>
 	  	
-	  	<a target="_blank" href="img_.jpg">
+	  	<a href="/whattodo/recommend.do?location=seocho">
 	  	<div class="w3-card-4 w3-opacity w3-hover-opacity-off" style="width:30%; height:250px;">
 		    <img src="https://image.samsungsds.com/global/ko/images/img/korea/img_office1.jpg?queryString=20171211104617" alt="Norway" style="width:100%">
 		    <div class="w3-container w3-center"style="color:black">
@@ -62,7 +61,7 @@ body {
 		    </div></a>
 	  	</div>
 	  	
-	  	<a target="_blank" href="img_po.jpg">
+	  	<a href="/whattodo/recommend.do?location=songpa">
 	  	<div class="w3-card-4 w3-opacity w3-hover-opacity-off" style="width:30%; height:250px;">
 		    <img src="https://image.samsungsds.com/global/ko/images/img/korea/img_office8.jpg" alt="Norway" style="width:100%">
 		    <div class="w3-container w3-center" style="color:black">
