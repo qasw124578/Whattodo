@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", new User(userid, name));
 			System.out.println(name);
 			System.out.println("로그인 성공");
-			response.sendRedirect("recommend.jsp");
+			response.sendRedirect("choice.jsp");
 			return;
 		}else{
 			//로그인 실패
