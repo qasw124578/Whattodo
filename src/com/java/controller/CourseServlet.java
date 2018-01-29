@@ -30,8 +30,10 @@ public class CourseServlet extends HttpServlet {
 			System.out.println(theme + goo);
 			
 			ArrayList<ArrayList<Restaurant>> list = courseDAO.courseView(theme, goo);
+			ArrayList<Course> list1 = courseDAO.getCourseView(theme, goo);
 			
-			request.setAttribute("courseList", list);
+			request.setAttribute("detail_list", list);
+			request.setAttribute("course_list", list1);
 			request.getRequestDispatcher("Course.jsp").forward(request, response);
 			System.out.println("forward");
 			return;

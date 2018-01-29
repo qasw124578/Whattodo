@@ -11,6 +11,10 @@ import com.java.model.vo.Restaurant;
 import com.java.util.DBUtil;
 
 public class CourseDAO2 {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
 	static {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -21,12 +25,12 @@ public class CourseDAO2 {
 	}
 
 	public ArrayList<ArrayList<Restaurant>> courseView(String theme, String goo) {
-		ArrayList<ArrayList<Restaurant>> list = new ArrayList<ArrayList<Restaurant>>();
+		ArrayList<ArrayList<Restaurant>> list1 = new ArrayList<ArrayList<Restaurant>>();
 
 		Connection conn = null; // 연결 변수
 		PreparedStatement stmt = null; // 연결 통로 변수
 		ResultSet rs = null; // 0단계 : 매개변수를 만들었다고 생각하면되
-		String sql = "select * from COURSE " + "where theme = ? and goo = ?";
+		//String sql = "select * from COURSE " + "where theme = ? and goo = ?";
 
 		String sql1 = "SELECT * FROM COURSE";
 		String sql2 = "SELECT * FROM CRS_DETAIL B JOIN PLACE C ON(B.DETAIL_PLAN = C.CODE) WHERE B.CODE = ? ORDER BY B.DETAIL_NUM";
@@ -64,7 +68,7 @@ public class CourseDAO2 {
 
 					course.add(obj);
 				}
-				list.add(course);
+				list1.add(course);
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -83,8 +87,40 @@ public class CourseDAO2 {
 		 * } catch (SQLException e) { e.printStackTrace(); }finally{
 		 * DBUtil.close(conn); DBUtil.close(stmt); DBUtil.close(rs); }
 		 */
+		
+		return list1;
+	}
+	
+	public ArrayList<Course> getCourseView(String theme1, String goo1) {
+		ArrayList<Course> list2 = new ArrayList<Course>();
+		String sql = "select * from COURSE " + "where theme = ? and goo = ?";
+		Course course1 = null;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, theme1);
+			pstmt.setString(2, goo1);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				course1 = new Course();
+				course1.setCode(rs.getString("code"));
+				course1.setName(rs.getString("name"));
+				course1.setContents(rs.getString("contents"));
+				course1.setGoo(rs.getString("goo"));
+				course1.setGood(rs.getInt("good"));
+				course1.setId(rs.getString("id"));
+				course1.setTheme(rs.getString("theme"));
+				course1.setWeather(rs.getString("weather"));
+				
+				list2.add(course1);
+			}
 
-		return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list2;
 
 	}
 
