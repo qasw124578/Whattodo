@@ -76,16 +76,18 @@ public class RecommendServlet extends HttpServlet {
 			temperature = (Double)weatherFull.get("temp") - 273.0;
 			temperature = Math.round(temperature*10)/10.0;
 			
+			System.out.println("icon: " + icon);
 			if (icon.equals("01d") || icon.equals("01n") || icon.equals("02d") || icon.equals("02n")) {
 				icon = "wi-day-sunny";
 				weatherCondition = "맑음";
-			} else if (icon=="03d" || icon=="03n" || icon=="04d" || icon=="04n" || icon=="11d" || icon=="11n") {
+			} else if (icon.equals("03d") || icon.equals("03n") || icon.equals("04d") || icon.equals("04n")
+					|| icon.equals("11d") || icon.equals("11n")) {
 				icon = "wi-cloudy";
 				weatherCondition = "구름";
-			} else if (icon=="09d" || icon=="09n" || icon=="10d" || icon=="10n") {
+			} else if (icon.equals("09d") || icon.equals("09n") || icon.equals("10d") || icon.equals("10n")) {
 				icon = "wi-rain";
 				weatherCondition = "비";
-			} else if (icon=="13d" || icon=="13n") {
+			} else if (icon.equals("13d") || icon.equals("13n")) {
 				icon = "wi-snowflake-cold";
 				weatherCondition = "눈";
 			} else {
@@ -99,12 +101,6 @@ public class RecommendServlet extends HttpServlet {
 		// 날씨 받아오기--------------------------------------------------------------
 		
 		String location = (String)request.getSession().getAttribute("location");
-		if (location.equals("songpa"))
-			location = "송파";
-		else if (location.equals("mapo"))
-			location = "마포";
-		else
-			location = "서초";
 		
 		// 코스 받아오기--------------------------------------------------------------
 		String courseCode = courseDao.getRandomCourse(location, weatherCondition);

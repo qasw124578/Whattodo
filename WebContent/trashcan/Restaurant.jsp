@@ -32,14 +32,14 @@
 	<jsp:include page="header.jsp" />
 	 <div>${obj }</div>
 	<div class="w3-container">
-		<table class="w3-table w3-striped w3-margin" style="width: 80%">
-			<tr>
-				<td>양식</td>
-				<td>중식</td>
-				<td>한식</td>
-				<td>분식</td>
-			</tr>
-		</table>
+		<div class="w3-margin-bottom w3-margin-top w3-bar flex flex-align-center flex-justify-center"
+			style="width: 100%; margin-top: 10px;">
+			<div onclick="selectTheme(this)" class="w3-button w3-white" style="width: 18%;">한식</div>
+			<div onclick="selectTheme(this)" class="w3-button w3-white" style="width: 18%;">양식</div>
+			<div onclick="selectTheme(this)" class="w3-button w3-white" style="width: 18%;">분식</div>
+			<div onclick="selectTheme(this)" class="w3-button w3-white" style="width: 18%;">일식</div>
+			<div onclick="selectTheme(this)" class="w3-button w3-white" style="width: 18%;">기타</div>
+		</div>
 		<!--패널 라인-->
 			<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
@@ -85,6 +85,16 @@
 		</div>
 	<%-- <!-- Footer -->
 	<jsp:include page="footer.jsp" /> --%>
-	 
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#accordion > div:first-child > div:nth-child(2)").addClass("in");
+	
+});
+
+function selectTheme(obj) {
+	location.href="restaurant.do?group=R&theme="
+			+ encodeURI($(obj).text(), "UTF-8");
+};
+</script>
 </body>
 </html>

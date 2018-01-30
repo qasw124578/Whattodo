@@ -39,7 +39,7 @@
 	<div class="w3-container" style="max-width: 1600px; margin-top: 20px; margin-bottom:20px;">
 		<div style="width: 90%; margin: auto;">
 		<h2><b>오늘의 추천 코스:</b> ${course.name }</h2>
-		<h5 style="margin-left:1%;">${course.contents }</h5>
+		<h5 style="margin-left:0.5%;">${course.contents }</h5>
 			<div class="w3-border w3-round-small " style="width: 100%; height: auto; margin-bottom:3%; overflow: hidden">
 				<div class="flex w3-padding-large">
 					<div class="flex flex-grow">

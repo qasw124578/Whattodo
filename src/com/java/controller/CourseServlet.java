@@ -26,7 +26,7 @@ public class CourseServlet extends HttpServlet {
 			
 			request.setCharacterEncoding("utf-8");		
 			String theme = request.getParameter("theme");
-			String goo = request.getParameter("goo");
+			String goo = (String)request.getSession().getAttribute("location");
 			System.out.println(theme + goo);
 			
 			ArrayList<ArrayList<Restaurant>> list = courseDAO.courseView(theme, goo);
@@ -34,7 +34,7 @@ public class CourseServlet extends HttpServlet {
 			
 			request.setAttribute("detail_list", list);
 			request.setAttribute("course_list", list1);
-			request.getRequestDispatcher("Course.jsp").forward(request, response);
+			request.getRequestDispatcher("course.jsp").forward(request, response);
 			System.out.println("forward");
 			return;
 		

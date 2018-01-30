@@ -24,16 +24,18 @@ public class RestaurantServlet extends HttpServlet {
 			throws ServletException, IOException {
 		RestaurantDAO restaurantDao = new RestaurantDAO();
 		
-		request.setCharacterEncoding("utf-8");		
+		request.setCharacterEncoding("utf-8");
+		String location = (String)request.getSession().getAttribute("location");
 		String theme = request.getParameter("theme");
-		String location = request.getParameter("location");
 		String place = request.getParameter("group");
-		System.out.println(theme + location + place);
 		ArrayList<Restaurant> list = restaurantDao.restaurantView(location, theme, place);
 		
 		request.setAttribute("restList", list);
-		request.getRequestDispatcher("Restaurant.jsp").forward(request, response);
-		System.out.println("forward");
+		if (place.equals("R"))
+			request.getRequestDispatcher("Restaurant.jsp").forward(request, response);
+		else
+			request.getRequestDispatcher("Place.jsp").forward(request, response);
+		
 		return;
 		
 	}

@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <!-- Web Font -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
 <style>
 .w3-allerta {
@@ -22,7 +21,7 @@
 
 <style>
 body {padding-right:0!important;}
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+body,h1,h2,h3,h4,h5 {}
 .bg-tawny-port {background-color: #672E3B!important;}
 .bg-white {background-color: #f1f1f1!important;}
 .txt-white {color: #f1f1f1!important;}
@@ -80,7 +79,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   	</div>
   	<span id="tState" class="w3-cell-middle w3-right w3-text-white right-margin">0.0</span>
   	
-  	<select id="location" class="w3-select w3-cell-middle w3-right w3-white" name="goo">
+  	<select id="local" class="w3-select w3-cell-middle w3-right w3-white" name="goo">
   		<option value="mapo">마포구</option>
   		<option value="seocho">서초구</option>
   		<option value="songpa">송파구</option>
@@ -92,11 +91,10 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </header>
 
 <div class="w3-bar w3-border flex flex-align-center" style="width:88%;margin-top:100px;margin-left:6%;margin-right:6%;">
-<div class="color-ccc w3-bar-item w3-button" style="width:20%;">추천 코스</div>
-<div onclick="movePage(this)" id="P" class="w3-button" style="width:20%;">관광지</div>
-<div onclick="movePage(this)" id="R" class="w3-button" style="width:20%;">식당</div>
-<div class="w3-button" style="width:20%;">다른 코스</div>
-<div class="w3-button" style="width:20%;">유저 코스</div>
+<div onclick="location.href='recommend.do'" class="w3-bar-item w3-button" style="width:25%;">추천 코스</div>
+<div onclick="movePage(this)" id="P" class="w3-button" style="width:25%;">관광지</div>
+<div onclick="movePage(this)" id="R" class="w3-button" style="width:25%;">식당</div>
+<div class="w3-button" style="width:25%;">다른 코스</div>
 </div>
 
 <!-- Overlay effect when opening sidebar on small screens -->
@@ -118,20 +116,35 @@ function w3_close() {
 // 메뉴바 클릭
 function movePage(obj) {
 	var group = $(obj).attr("id");
-	if(group=="R"){
-			location.href = "restaurant.do?location="
-			+ encodeURI("서초", "UTF-8") + "&theme="
-			+ encodeURI("한식", "UTF-8") + "&group=" + group;
-	}else if(group=="P"){
-			location.href = "place.do?location="
-			+ encodeURI("서초", "UTF-8") + "&theme="
-			+ encodeURI("한식", "UTF-8") + "&group=" + group;
+	if(group=="P"){
+		location.href = "place.do?theme="
+		+ encodeURI("문화", "UTF-8") + "&group=" + group;
+	}else if(group=="R"){
+		location.href = "restaurant.do?group=" + group;
+				//"theme=" + encodeURI("한식", "UTF-8");
+			
 	}
 }
 
 // 날씨 받아오기
 $(document).ready(function () {
-	$("#location").val("${location}").prop("selected", true);
+	// location selection
+	var local = "${sessionScope.location}";
+	if (local == "서초") {
+		local = "seocho";
+	} else if (local == "마포") {
+		local = "mapo";
+	} else {
+		local = "songpa";
+	}
+	
+	$("#local").val(local).prop("selected", true);
+	
+	$("#local").on("change", function() {
+		location.href="choice.do?location=" + $("#local option:selected").val();
+	});
+	
+	
 	$.ajax({
 		url: "http://api.openweathermap.org/data/2.5/weather",
 		data: {
