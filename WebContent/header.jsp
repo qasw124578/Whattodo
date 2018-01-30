@@ -116,14 +116,8 @@ function w3_close() {
 // 메뉴바 클릭
 function movePage(obj) {
 	var group = $(obj).attr("id");
-	if(group=="P"){
-		location.href = "place.do?theme="
-		+ encodeURI("문화", "UTF-8") + "&group=" + group;
-	}else if(group=="R"){
-		location.href = "restaurant.do?group=" + group;
+	location.href = "restaurant.do?group=" + group;
 				//"theme=" + encodeURI("한식", "UTF-8");
-			
-	}
 }
 
 // 날씨 받아오기
