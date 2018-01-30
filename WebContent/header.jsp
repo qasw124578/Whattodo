@@ -18,6 +18,9 @@
 <link rel="stylesheet" type="text/css" href="./icons/css/weather-icons.min.css">
 <!-- 수정: jQuery Import -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- 수정: Bootstrap Import -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
 body {padding-right:0!important;}
@@ -46,6 +49,9 @@ body,h1,h2,h3,h4,h5 {}
 .flex-justify-between{justify-content:space-between;}
 .flex-wrap{flex-wrap:wrap;}
 
+.width-50{width:50%;}
+.height-100{height: 300px;}
+
 .1em {font-size: 1em;}
 .05em {font-size: 0.5em;}
 .07em {font-size: 0.7em;}
@@ -54,6 +60,8 @@ body,h1,h2,h3,h4,h5 {}
 .padding-bot{padding-bottom: 24px!important;}
 .height-100{height:100%;}
 .width-100{widht:100%;}
+
+.cursor-pointer {cursor: pointer;}
 </style>
 
 <!-- Sidebar/menu -->
@@ -66,7 +74,7 @@ body,h1,h2,h3,h4,h5 {}
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top bg-tawny-port w3-padding-16 flex flex-align-center">
-	<span class="logo w3-cell-middle w3-text-white w3-left w3-allerta">오늘 뭐하세요?</span>
+	<span onclick="location.href='recommend.do'" class="cursor-pointer logo w3-cell-middle w3-text-white w3-left w3-allerta">오늘 뭐하세요?</span>
 	
 	<span class="flex-grow"></span>
 	
@@ -85,16 +93,26 @@ body,h1,h2,h3,h4,h5 {}
   		<option value="songpa">송파구</option>
   	</select>
   	
-  	<a href="javascript:void(0)" class="w3-cell-middle w3-right bg-tawny-port" onclick="w3_open()">
+  	<div class="dropdown">
+  	<a href="javascript:void(0)" class="dropdown-toggle w3-cell-middle w3-right bg-tawny-port" id="menu1" data-toggle="dropdown">
   		<i class="w3-cell-middle w3-right w3-text-white right-margin fa fa-user" style="font-size:2.5em"></i>
   	</a>
+    <!-- <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
+    <span class="caret"></span></button> -->
+    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="dummy.do">Information</a></li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="logout.do">Logout</a></li>    
+    </ul>
+  </div><br>
+  	
 </header>
 
 <div class="w3-bar w3-border flex flex-align-center" style="width:88%;margin-top:100px;margin-left:6%;margin-right:6%;">
 <div onclick="location.href='recommend.do'" class="w3-bar-item w3-button" style="width:25%;">추천 코스</div>
 <div onclick="movePage(this)" id="P" class="w3-button" style="width:25%;">관광지</div>
 <div onclick="movePage(this)" id="R" class="w3-button" style="width:25%;">식당</div>
-<div class="w3-button" style="width:25%;">다른 코스</div>
+<div onclick="otherCourses()" class="w3-button" style="width:25%;">다른 코스</div>
 </div>
 
 <!-- Overlay effect when opening sidebar on small screens -->
@@ -102,7 +120,7 @@ body,h1,h2,h3,h4,h5 {}
 
 <script>
 // Script to open and close sidebar
-var weather;
+/* var weather;
 function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
     document.getElementById("myOverlay").style.display = "block";
@@ -111,13 +129,18 @@ function w3_open() {
 function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
-}
+} */
+
+$(".dropdown-toggle").dropdown();
 
 // 메뉴바 클릭
 function movePage(obj) {
 	var group = $(obj).attr("id");
 	location.href = "restaurant.do?group=" + group;
 				//"theme=" + encodeURI("한식", "UTF-8");
+}
+function otherCourses() {
+	location.href = "course.do";
 }
 
 // 날씨 받아오기

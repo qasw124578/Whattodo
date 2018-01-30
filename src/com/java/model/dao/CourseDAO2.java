@@ -14,45 +14,28 @@ public class CourseDAO2 {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	
-	static {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // 0단계 :
-	}
 
-	public ArrayList<ArrayList<Restaurant>> courseView(String theme, String goo) {
-		ArrayList<ArrayList<Restaurant>> list1 = new ArrayList<ArrayList<Restaurant>>();
+	public ArrayList<ArrayList<Restaurant>> courseView(ArrayList<Course> courseList) {
+		ArrayList<ArrayList<Restaurant>> courseDetailList = new ArrayList<ArrayList<Restaurant>>();
 
 		Connection conn = null; // 연결 변수
 		PreparedStatement stmt = null; // 연결 통로 변수
 		ResultSet rs = null; // 0단계 : 매개변수를 만들었다고 생각하면되
 		//String sql = "select * from COURSE " + "where theme = ? and goo = ?";
 
-		String sql1 = "SELECT * FROM COURSE";
 		String sql2 = "SELECT * FROM CRS_DETAIL B JOIN PLACE C ON(B.DETAIL_PLAN = C.CODE) WHERE B.CODE = ? ORDER BY B.DETAIL_NUM";
 
 		// while(rs.next())
 		try {
-			ArrayList<String> courses = new ArrayList<String>();
 			conn = DBUtil.getConnection();
-			stmt = conn.prepareStatement(sql1);
-			rs = stmt.executeQuery();
 
 			// 코스 목록 받아오기
-			while (rs.next()) {
-				courses.add(rs.getString("code"));
-			}
-
-			for (String courseCode : courses) {
+			for (Course courseCode : courseList) {
 				stmt = conn.prepareStatement(sql2);
-				stmt.setString(1, courseCode);
+				stmt.setString(1, courseCode.getCode());
 				rs = stmt.executeQuery();
 
-				ArrayList<Restaurant> course = new ArrayList<Restaurant>();
+				ArrayList<Restaurant> courseDetail = new ArrayList<Restaurant>();
 
 				while (rs.next()) {
 					Restaurant obj = new Restaurant();
@@ -66,9 +49,9 @@ public class CourseDAO2 {
 					obj.setGood(rs.getInt("good"));
 					obj.setFile_path(rs.getString("file_path"));
 
-					course.add(obj);
+					courseDetail.add(obj);
 				}
-				list1.add(course);
+				courseDetailList.add(courseDetail);
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -88,18 +71,25 @@ public class CourseDAO2 {
 		 * DBUtil.close(conn); DBUtil.close(stmt); DBUtil.close(rs); }
 		 */
 		
-		return list1;
+		return courseDetailList;
 	}
 	
-	public ArrayList<Course> getCourseView(String theme1, String goo1) {
+	public ArrayList<Course> getCourseView(String theme, String goo) {
 		ArrayList<Course> list2 = new ArrayList<Course>();
-		String sql = "select * from COURSE " + "where theme = ? and goo = ?";
+		String sql = "select * from COURSE " + "where goo = ?";
+		
+		if (theme != null)
+			sql += " and theme = ?";
+		
 		Course course1 = null;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, theme1);
-			pstmt.setString(2, goo1);
+			pstmt.setString(1, goo);
+			
+			if (theme != null)
+				pstmt.setString(2, theme);
+			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {

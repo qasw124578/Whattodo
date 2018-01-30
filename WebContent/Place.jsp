@@ -57,27 +57,27 @@ a.w3-button {
 						</h4>
 					</div>
 					<div id="collapse${item.code}" class="panel-collapse collapse">
-						<div class="panel-body"
-							style="display: flex; align-items: center; justify-contents: center;">
-							<!-- <div class="panel-body"> -->
-							<div style="display: inline-block; height: auto; width: 30%;">
-								<img src="./img/P_image/${item.code}.jpg" class="w3-round-large"
-									style="width: 100%; height: auto;" alt="img1">
+						<div class="panel-body flex flex-align-center flex-justify-center">
+						<!-- <div class="panel-body"> -->
+							<div class="w3-margin width-50 flex flex-align-center flex-justify-center" style="overflow:hidden; width:50%; height: 300px;">
+								<img src="./img/P_image/${item.code}.jpg"
+									style="width:100%; height:auto;" alt="img1">
 							</div>
-							<div id="map${item.code}" style="width: 50%; height: 400px;"></div>
-
+							<div class="w3-margin width-50 flex flex-align-center flex-justify-center" style="margin-right: 0;">
+								<div id="map${item.code}" style="width:90vh;height:300px;"></div>
+							</div>
 							<!--지도 생성 및 지도 마커 스크립트  -->
 							<script type="text/javascript">
-						var map = new naver.maps.Map('map${item.code}', {
-						    center: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
-						    zoom: 10
-						});
-						
-						var marker = new naver.maps.Marker({
-						    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
-						    map: map
-						});		
-						</script>
+							var map = new naver.maps.Map('map${item.code}', {
+							    center: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+							    zoom: 10
+							});
+							
+							var marker = new naver.maps.Marker({
+							    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+							    map: map
+							});		
+							</script>
 
 						</div>
 						<h2>${item.name}</h2>

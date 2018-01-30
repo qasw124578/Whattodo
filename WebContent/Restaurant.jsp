@@ -30,7 +30,6 @@
 
 	<!-- Top menu on small screens -->
 	<jsp:include page="header.jsp" />
-	 <div>${obj }</div>
 	<div class="w3-container">
 		<div class="w3-margin-bottom w3-margin-top w3-bar flex flex-align-center flex-justify-center"
 			style="width: 100%; margin-top: 10px;">
@@ -53,13 +52,15 @@
 					</h4>
 				</div>
 				<div id="collapse${item.code}" class="panel-collapse collapse">
-					<div class="panel-body" style="display:flex; align-items:center; justify-contents:center;">
+					<div class="panel-body flex flex-align-center flex-justify-center">
 					<!-- <div class="panel-body"> -->
-						<div style="display: inline-block; height:auto; width:30%;">
+						<div class="w3-margin width-50 flex flex-align-center flex-justify-center" style="overflow:hidden; width:50%; height: 300px;">
 							<img src="./img/P_image/${item.code}.jpg"
-								class="w3-round-large" style="width:100%; height:auto;" alt="img1">
+								style="width:90vh; height:auto;" alt="img1">
 						</div>
-						<div id="map${item.code}" style="width:50%;height:400px;"></div>
+						<div class="w3-margin width-50 flex flex-align-center flex-justify-center" style="margin-right: 0;">
+							<div id="map${item.code}" style="width:90vh;height:300px;"></div>
+						</div>
 						
 						<!--지도 생성 및 지도 마커 스크립트  -->
 						<script type="text/javascript">
