@@ -3,6 +3,7 @@ package com.java.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -16,7 +17,38 @@ public class CourseDAO {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-
+	
+	public String getRandomCourse(String locationKor, String weatherCondition) {
+		String sql = "SELECT CODE FROM COURSE WHERE GOO = ? AND WEATHER LIKE '%'||?||'%'";
+		ArrayList<String> courses = null;
+		String courseCode = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, locationKor);
+			pstmt.setString(2, weatherCondition);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				courses = new ArrayList<String>();
+				do {
+					courses.add(rs.getString("code"));
+				} while (rs.next());
+				
+				int index = (int)Math.floor(Math.random() * courses.size());
+				courseCode = courses.get(index);
+				System.out.println(index);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return courseCode;
+	}
+	
 	public Course getCourseInfo(String courseCode) {
 		String sql = "SELECT * FROM COURSE WHERE CODE = ?";
 		Course course = null;
@@ -75,7 +107,6 @@ public class CourseDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return location;
 	}
 

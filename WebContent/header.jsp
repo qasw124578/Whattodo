@@ -74,13 +74,13 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   	<div id="wIcon" class="right-margin-small">
   	<i onclick="getWeather();" class="w3-cell-middle w3-right w3-text-white right-margin wi wi-day-sunny" style="font-size:2em"></i>
   	</div>
-  	<span id="wState" class="w3-cell-middle w3-right w3-text-white right-margin">Winter</span>
+  	<span id="wState" class="w3-cell-middle w3-right w3-text-white right-margin">Wait</span>
   	<div class="right-margin-small">
   		<i class="w3-cell-middle w3-right w3-text-white right-margin wi wi-thermometer" style="font-size:1.7em"></i>
   	</div>
-  	<span id="tState" class="w3-cell-middle w3-right w3-text-white right-margin">-36.5</span>
+  	<span id="tState" class="w3-cell-middle w3-right w3-text-white right-margin">0.0</span>
   	
-  	<select class="w3-select w3-cell-middle w3-right w3-white" name="goo">
+  	<select id="location" class="w3-select w3-cell-middle w3-right w3-white" name="goo">
   		<option value="mapo">마포구</option>
   		<option value="seocho">서초구</option>
   		<option value="songpa">송파구</option>
@@ -118,13 +118,20 @@ function w3_close() {
 // 메뉴바 클릭
 function movePage(obj) {
 	var group = $(obj).attr("id");
-	location.href = "restaurant.do?location="
+	if(group=="R"){
+			location.href = "restaurant.do?location="
 			+ encodeURI("서초", "UTF-8") + "&theme="
 			+ encodeURI("한식", "UTF-8") + "&group=" + group;
+	}else if(group=="P"){
+			location.href = "place.do?location="
+			+ encodeURI("서초", "UTF-8") + "&theme="
+			+ encodeURI("한식", "UTF-8") + "&group=" + group;
+	}
 }
 
 // 날씨 받아오기
-function getWeather() {
+$(document).ready(function () {
+	$("#location").val("${location}").prop("selected", true);
 	$.ajax({
 		url: "http://api.openweathermap.org/data/2.5/weather",
 		data: {
@@ -164,13 +171,11 @@ function getWeather() {
 			}
 			
 			$("#wIcon").html("<i class='w3-cell-middle w3-right w3-text-white right-margin wi " + icon + "' style='font-size:2em'></i>");
-
-			alert(data.main.temp - 273);
 		},
 		error: function(data) {
 			alert("날씨 받아오기 실패");
 		}
 		
 	});
-}
+});
 </script>

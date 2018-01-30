@@ -34,7 +34,7 @@
 
 	<!-- Top menu on small screens -->
 	<jsp:include page="header.jsp" />
-
+	
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-container" style="max-width: 1600px; margin-top: 20px; margin-bottom:20px;">
 		<div style="width: 90%; margin: auto;">
@@ -45,10 +45,10 @@
 					<div class="flex flex-grow">
 					<div id="wIcon" class="right-margin">
 						<h3>
-						<i onclick="getWeather();" class="w3-cell-middle w3-right right-margin wi wi-day-sunny" style="font-size:2rem"></i>
+						<i onclick="getWeather();" class="w3-cell-middle w3-right right-margin wi ${icon }" style="font-size:2rem"></i>
 						</h3>
 					</div>
-			  		<span id="wState" class="w3-cell-middle w3-right right-margin"><h3>Winter</h3></span>
+			  		<span id="wState" class="w3-cell-middle w3-right right-margin"><h3>${weather }</h3></span>
 			  		</div>
 			  		<div class="flex flex-grow">
 			  			<div class="right-margin">
@@ -56,7 +56,7 @@
 				  		<i class="w3-cell-middle w3-right right-margin wi wi-thermometer" style="font-size:2rem"></i>
 				  		</h3>
 				  		</div>
-				  		<span id="tState" class="w3-cell-middle w3-right right-margin"><h3>-36.5</h3></span>
+				  		<span id="tState" class="w3-cell-middle w3-right right-margin"><h3>${temperature }</h3></span>
 			  		</div>
   				</div>
 				<div class="w3-padding-large padding-bot">
@@ -121,7 +121,7 @@
 	 --%>
 <script type="text/javascript">
 var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(${location.latitude}, ${location.longitude}),
+    center: new naver.maps.LatLng(${mapLocation.latitude}, ${mapLocation.longitude}),
     zoom: 10
 });
 </script>
