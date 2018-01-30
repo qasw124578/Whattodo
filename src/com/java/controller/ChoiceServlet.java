@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.java.model.dao.UserDAO;
-import com.java.model.vo.User;
-
 /**
  * Servlet implementation class ChoiceServlet
  */

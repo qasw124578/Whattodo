@@ -72,8 +72,8 @@
 				</div>
 				<div id="collapse<%=course_list.get(i).getCode()%>"
 					class="panel-collapse collapse">
-					<h2><%=course_list.get(i).getName()%></h2>
-					<p><%=course_list.get(i).getContents()%></p>
+					<h2 style="margin-left: 0.5%;"><%=course_list.get(i).getName()%></h2>
+					<p style="margin-left: 1%;"><%=course_list.get(i).getContents()%></p>
 					<div class="panel-body flex flex-align-center flex-justify-center">
 						<div class="width-50 flex flex-wrap">
 						<%
