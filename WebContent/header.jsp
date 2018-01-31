@@ -1,5 +1,12 @@
+<%@page import="com.java.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	User user = (User)session.getAttribute("user");
+	if (user == null) {
+		out.println("<script> alert('로그인이 필요합니다.'); location.href = 'login.jsp';</script>");
+	}
+%>
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -1,5 +1,12 @@
+<%@page import="com.java.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	User user = (User)session.getAttribute("user");
+	if (user != null) {
+		out.println("<script> alert('지역선택 화면으로 이동합니다.'); location.href = 'choice.jsp';</script>");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <title>What to do?</title>
