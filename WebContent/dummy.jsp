@@ -8,5 +8,7 @@
 </head>
 <body>
 힘드러서 못만듬
+<br><br>
+<a href="javascript:history.back();">돌아가기</a>
 </body>
 </html>
