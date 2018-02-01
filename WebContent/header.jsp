@@ -56,6 +56,8 @@ body {padding-right:0!important;}
 .flex-align-center{align-items:center;}
 .flex-justify-center{justify-content:center;}
 .flex-justify-between{justify-content:space-between;}
+.flex-justify-around{justify-content:space-around;}
+
 .flex-wrap{flex-wrap:wrap;}
 
 .width-50{width:50%;}

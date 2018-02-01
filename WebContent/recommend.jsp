@@ -70,14 +70,15 @@
 				</div>
 			</div>
 			
-			<div class="flex flex-justify-between flex-wrap">
+			<div id="crsDetail" class="flex flex-justify-around flex-align-center flex-wrap">
 			
 			<c:forEach var="detail" items="${detailList }">
-			
-				
+				<div class="flex flex-justify-center" style="width:60px;">
+					<span class="glyphicon glyphicon-chevron-right logo w3-text-grey"></span>
+				</div>
 
-				<div class="w3-card-4" style="width: 24%; min-width:200px; margin-bottom:3%;">
-					<div class="w3-padding-small w3-opacity w3-hover-opacity-off"
+				<div class="w3-card-4 w3-margin" style="width: 24%; min-width:200px;">
+					<div id="img_${detail.code }" class="w3-padding-small w3-opacity w3-hover-opacity-off cursor-pointer"
 						data-toggle="modal" data-target="#myModal${detail.code }"
 						style="height: 160px; overflow: hidden">
 						<img src="./img/P_image/${detail.code }.jpg" class="w3-round" style="width: 100%">
@@ -91,12 +92,15 @@
 					<div class="modal-dialog">
 
 						<!-- Modal content-->
-						<div class="modal-content">
+						<div class="modal-content" >
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">${detail.name }</h4>
 							</div>
 							<div class="modal-body">
+							<div class="flex flex-justify-center flex-align-center" style="width:100%; height: 300px; overflow: hidden;">
+								<img style="width:100%; height: auto;"src="./img/P_image/${detail.code }.jpg" />
+							</div>
 								<p>${detail.explain }</p>
 							</div>
 							<div class="modal-footer">
@@ -120,6 +124,7 @@
 	<jsp:include page="footer.jsp" />
 	 --%>
 <script type="text/javascript">
+$("#crsDetail > div:first-child").remove();
 var map = new naver.maps.Map('map', {
     center: new naver.maps.LatLng(${mapLocation.latitude}, ${mapLocation.longitude}),
     zoom: 10
@@ -130,6 +135,15 @@ var map = new naver.maps.Map('map', {
 var marker = new naver.maps.Marker({
     position: new naver.maps.LatLng(${loc.latitude}, ${loc.longitude}),
     map: map
+});
+naver.maps.Event.addListener(marker, 'mouseover', function(e) {
+    $("#img_${loc.code }").css("opacity", 1);
+});
+naver.maps.Event.addListener(marker, 'mouseout', function(e) {
+    $("#img_${loc.code }").css("opacity", '');
+});
+naver.maps.Event.addListener(marker, 'click', function(e) {
+    $("#myModal${loc.code }").modal()
 });
 </script>
 </c:forEach>

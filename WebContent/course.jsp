@@ -61,7 +61,7 @@
 				<%
 					for (int i = 0; i < course_list.size(); i++) {
 				%>
-				<div class="panel-heading" style="background-color: #d8a6b3">
+				<div class="panel-heading">
 
 					<h4 class="panel-title">
 

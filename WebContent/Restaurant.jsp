@@ -45,7 +45,7 @@
 			
 			<c:forEach var="item" items="${restList}">
     		
-				<div class="panel-heading" style="background-color:#672E3B">
+				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a style="color:#ffffff" data-toggle="collapse" data-parent="#accordion"
 							href="#collapse${item.code}" >${item.name}</a>
@@ -72,7 +72,7 @@
 						var marker = new naver.maps.Marker({
 						    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
 						    map: map
-						});		
+						});
 						</script>
 						
 					</div>

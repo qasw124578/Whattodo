@@ -56,7 +56,7 @@ a.w3-button {
 								data-parent="#accordion" href="#collapse${item.code}">${item.name}</a>
 						</h4>
 					</div>
-					<div id="collapse${item.code}" class="panel-collapse collapse">
+					<div id="collapse${item.code}" class="w3-padding panel-collapse collapse">
 						<div class="panel-body flex flex-align-center flex-justify-center">
 						<!-- <div class="panel-body"> -->
 							<div class="w3-margin width-50 flex flex-align-center flex-justify-center" style="overflow:hidden; width:50%; height: 300px;">
@@ -68,17 +68,14 @@ a.w3-button {
 							</div>
 							<!--지도 생성 및 지도 마커 스크립트  -->
 							<script type="text/javascript">
-							var map_${item.code} = function () {
-								var map = new naver.maps.Map('map${item.code}', {
-								    center: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
-								    zoom: 10
-								});
-								var marker = new naver.maps.Marker({
-								    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
-								    map: map
-								});
-							}
-							map_${item.code}();
+							var map = new naver.maps.Map('map${item.code}', {
+							    center: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+							    zoom: 10
+							});
+							var marker = new naver.maps.Marker({
+							    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+							    map: map
+							});
 							</script>
 
 						</div>
