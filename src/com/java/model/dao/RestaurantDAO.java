@@ -10,14 +10,6 @@ import com.java.model.vo.Restaurant;
 import com.java.util.DBUtil;
 
 public class RestaurantDAO {
-	static{
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//0´Ü°è :
-	}
 	
 	public ArrayList<Restaurant> restaurantView(String location, String theme, String place){
 		ArrayList<Restaurant> list = new ArrayList<Restaurant>();
@@ -61,7 +53,7 @@ public class RestaurantDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally{
 			DBUtil.close(conn);
 			DBUtil.close(stmt);
 			DBUtil.close(rs);

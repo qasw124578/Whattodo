@@ -9,15 +9,6 @@ import com.java.util.DBUtil;
 
 //DAO는 핸들링하고 싶은 데이터 별 즉 entity별로 만들어
 public class UserDAO {
-	
-	static{
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//0단계 :
-	}
  
 	public String login(String userid, String password){
 		String name = null;
@@ -41,7 +32,7 @@ public class UserDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			DBUtil.close(conn);
 			DBUtil.close(stmt);
 			DBUtil.close(rs);

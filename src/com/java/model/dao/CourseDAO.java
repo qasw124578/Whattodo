@@ -44,6 +44,10 @@ public class CourseDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs);
+			DBUtil.close(pstmt);
+			DBUtil.close(conn);
 		}
 		
 		return courseCode;
@@ -72,6 +76,10 @@ public class CourseDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs);
+			DBUtil.close(pstmt);
+			DBUtil.close(conn);
 		}
 
 		return course;
@@ -106,6 +114,10 @@ public class CourseDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs);
+			DBUtil.close(pstmt);
+			DBUtil.close(conn);
 		}
 		return location;
 	}
@@ -138,6 +150,10 @@ public class CourseDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs);
+			DBUtil.close(pstmt);
+			DBUtil.close(conn);
 		}
 
 		return list;

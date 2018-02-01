@@ -55,6 +55,10 @@ public class CourseDAO2 {
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		} finally {
+			DBUtil.close(rs);
+			DBUtil.close(pstmt);
+			DBUtil.close(conn);
 		}
 
 		/*
@@ -108,6 +112,10 @@ public class CourseDAO2 {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs);
+			DBUtil.close(pstmt);
+			DBUtil.close(conn);
 		}
 
 		return list2;
