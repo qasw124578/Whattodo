@@ -61,7 +61,7 @@
 				<%
 					for (int i = 0; i < course_list.size(); i++) {
 				%>
-				<div class="panel-heading">
+				<div class="panel-heading  w3-border w3-round-large">
 
 					<h4 class="panel-title">
 
@@ -76,9 +76,13 @@
 					<p style="margin-left: 1%;"><%=course_list.get(i).getContents()%></p>
 					<div class="panel-body flex flex-align-center flex-justify-center">
 						<div class="width-50 flex flex-wrap">
+							
 						<%
 							for (int j = 0; j < detail_list.get(i).size(); j++) {
 						%>
+							<div class="flex flex-justify-center flex-align-center" style="width:65px;">
+								<span class="glyphicon glyphicon-chevron-right logo w3-text-grey"></span>
+							</div>
 						<!-- <div class="panel-body"> -->
 							<div class="w3-card-4 w3-margin"
 								style="width: 24%; min-width: 200px; margin-bottom: 3%;">
@@ -118,8 +122,6 @@
 								</div>
 							</div>
 						<%
-								latitude += detail_list.get(i).get(j).getLatitude();
-								longitude += detail_list.get(i).get(j).getLongitude();
 							}
 						%>
 						</div>
@@ -128,27 +130,7 @@
 						<div class="width-50 flex flex-align-center flex-justify-center">
 							<div id="map<%=course_list.get(i).getCode() %>" style="width: 90vh; height: 60vh;"></div>
 						</div>
-						<script type="text/javascript">
-							var map = new naver.maps.Map('map<%=course_list.get(i).getCode() %>',
-							{
-								center : new naver.maps.LatLng(<%=latitude/detail_list.get(i).size() %>, <%=longitude/detail_list.get(i).size() %>),
-								zoom : 9
-							});
-					<%
-						latitude = 0.0; longitude = 0.0;
 						
-						for (Restaurant rest : detail_list.get(i)) {
-					%>
-							var marker = new naver.maps.Marker({
-								position : new naver.maps.LatLng(<%=rest.getLatitude() %>
-										, <%=rest.getLongitude() %>),
-								
-								map : map
-							});
-					<%
-						}
-					%>
-						</script>
 					</div>
 				</div>
 				<%
@@ -163,15 +145,45 @@
 	<%-- <!-- Footer -->
 	<jsp:include page="footer.jsp" /> --%>
 	<script>
-		$(document).ready(
-				function() {
-					$("#accordion > div:first-child > div:nth-child(2)").addClass("in");
+	$(".panel-body > div:first-child > div:first-child").remove();
+	$(document).ready(
+			function() {
+				$("#accordion > div:first-child > div:nth-child(2)").addClass("in");
 
-				});
-		function selectTheme(obj) {
-			location.href = "course.do?theme="
-					+ encodeURI($(obj).text(), "UTF-8");
-		};
+			});
+	function selectTheme(obj) {
+		location.href = "course.do?theme="
+				+ encodeURI($(obj).text(), "UTF-8");
+	};
+
+	<%
+	for (int i = 0; i < course_list.size(); i++) {
+		// 중심위치 잡기
+		for (Restaurant rest : detail_list.get(i)) {
+			latitude += rest.getLatitude();
+			longitude += rest.getLongitude();
+		}
+	%>
+	var map = new naver.maps.Map('map<%=course_list.get(i).getCode() %>',
+	{
+		center : new naver.maps.LatLng(<%=latitude/detail_list.get(i).size() %>, <%=longitude/detail_list.get(i).size() %>),
+		zoom : 9
+	});
+	<%
+		latitude = 0.0; longitude = 0.0;
+
+		for (Restaurant rest : detail_list.get(i)) {
+		%>
+			var marker = new naver.maps.Marker({
+				position : new naver.maps.LatLng(<%=rest.getLatitude() %>
+						, <%=rest.getLongitude() %>),
+				
+				map : map
+			});
+		<%
+		}
+	}
+%>
 	</script>
 </body>
 </html>

@@ -73,7 +73,7 @@
 			<div id="crsDetail" class="flex flex-justify-around flex-align-center flex-wrap">
 			
 			<c:forEach var="detail" items="${detailList }">
-				<div class="flex flex-justify-center" style="width:60px;">
+				<div class="flex flex-justify-center" style="width:65px;">
 					<span class="glyphicon glyphicon-chevron-right logo w3-text-grey"></span>
 				</div>
 
@@ -101,7 +101,7 @@
 							<div class="flex flex-justify-center flex-align-center" style="width:100%; height: 300px; overflow: hidden;">
 								<img style="width:100%; height: auto;"src="./img/P_image/${detail.code }.jpg" />
 							</div>
-								<p>${detail.explain }</p>
+								<p class="w3-margin-top">${detail.explain }</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"

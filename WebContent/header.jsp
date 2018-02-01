@@ -35,8 +35,8 @@ body {padding-right:0!important;}
 .bg-tawny-port {background-color: #672E3B!important;}
 .bg-white {background-color: #f1f1f1!important;}
 .txt-white {color: #f1f1f1!important;}
-.panel-default > div.panel-heading{background-color: black; margin-top: 0.3%;}
-.panel-default > div.panel-heading:first-child{background-color: white;}
+.panel-default > div.panel-heading{background-color: #672E3B; margin-top: 0.3%;}
+.panel-default > div.panel-heading:first-child{margin-top: 0;}
 </style>
 
 <!-- 수정: Style Modified -->

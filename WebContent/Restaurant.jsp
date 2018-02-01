@@ -45,39 +45,28 @@
 			
 			<c:forEach var="item" items="${restList}">
     		
-				<div class="panel-heading">
+				<div class="panel-heading w3-border w3-round-large">
 					<h4 class="panel-title">
 						<a style="color:#ffffff" data-toggle="collapse" data-parent="#accordion"
 							href="#collapse${item.code}" >${item.name}</a>
 					</h4>
 				</div>
-				<div id="collapse${item.code}" class="panel-collapse collapse">
+				<div id="collapse${item.code}" class="w3-padding panel-collapse collapse">
 					<div class="panel-body flex flex-align-center flex-justify-center">
 					<!-- <div class="panel-body"> -->
-						<div class="w3-margin width-50 flex flex-align-center flex-justify-center" style="overflow:hidden; width:50%; height: 300px;">
+						<div class="w3-margin-right width-50 flex flex-align-center flex-justify-center" style="overflow:hidden; width:50%; height: 300px;">
 							<img src="./img/P_image/${item.code}.jpg"
 								style="width:90vh; height:auto;" alt="img1">
 						</div>
-						<div class="w3-margin width-50 flex flex-align-center flex-justify-center" style="margin-right: 0;">
-							<div id="map${item.code}" style="width:90vh;height:300px;"></div>
+						<div class="width-50 flex flex-align-center flex-justify-center" style="margin-right: 0;">
+							<div id="map${item.code}" style="width:100vh;height:300px;"></div>
 						</div>
 						
 						<!--지도 생성 및 지도 마커 스크립트  -->
-						<script type="text/javascript">
-						var map = new naver.maps.Map('map${item.code}', {
-						    center: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
-						    zoom: 10
-						});
-						
-						var marker = new naver.maps.Marker({
-						    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
-						    map: map
-						});
-						</script>
 						
 					</div>
 					<h2> ${item.name} </h2>
-					<p> ${item.explain} </p>
+					<p class="w3-margin-left"> ${item.explain} </p>
 				</div>
 				</c:forEach>
 			</div>
@@ -97,5 +86,19 @@ function selectTheme(obj) {
 			+ encodeURI($(obj).text(), "UTF-8");
 };
 </script>
+<!--지도 생성 및 지도 마커 스크립트  -->
+<c:forEach var="item" items="${restList }">
+<script type="text/javascript">
+var map = new naver.maps.Map('map${item.code}', {
+    center: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+    zoom: 10
+});
+
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(${item.latitude}, ${item.longitude}),
+    map: map
+});
+</script>
+</c:forEach>
 </body>
 </html>
