@@ -12,14 +12,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<!-- Web Font -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
-<style>
-.w3-allerta {
-  font-family: "Allerta Stencil", Sans-serif;
-}
-</style>
-
 <!-- 수정: Icons Import -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="./icons/css/weather-icons.min.css">
@@ -29,12 +21,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- Web Font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Allerta Stencil", Sans-serif;}
+</style>
+
 <style>
 body {padding-right:0!important;}
-body,h1,h2,h3,h4,h5 {}
 .bg-tawny-port {background-color: #672E3B!important;}
 .bg-white {background-color: #f1f1f1!important;}
 .txt-white {color: #f1f1f1!important;}
+.panel-default > div.panel-heading{background-color: black; margin-top: 0.3%;}
+.panel-default > div.panel-heading:first-child{background-color: white;}
 </style>
 
 <!-- 수정: Style Modified -->
@@ -81,7 +80,7 @@ body,h1,h2,h3,h4,h5 {}
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top bg-tawny-port w3-padding-16 flex flex-align-center">
-	<span onclick="location.href='recommend.do'" class="cursor-pointer logo w3-cell-middle w3-text-white w3-left w3-allerta">오늘 뭐하세요?</span>
+	<span onclick="location.href='recommend.do'" class="cursor-pointer logo w3-cell-middle w3-text-white w3-left">오늘 뭐하세요?</span>
 	
 	<span class="flex-grow"></span>
 	
