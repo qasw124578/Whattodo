@@ -6,16 +6,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	ArrayList<ArrayList<Restaurant>> detail_list = (ArrayList<ArrayList<Restaurant>>) request
-			.getAttribute("detail_list");
+	ArrayList<ArrayList<Restaurant>> detail_list = (ArrayList<ArrayList<Restaurant>>) request.getAttribute("detail_list");
 	ArrayList<Course> course_list = (ArrayList<Course>) request.getAttribute("course_list");
-
+	
 	Double latitude = 0.0, longitude = 0.0;
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -58,11 +58,11 @@
 		<!--패널 라인-->
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
-				<!----------------------- 코스목록 시작 ----------------------->
+			<!----------------------- 코스목록 시작 ----------------------->
 				<%
 					for (int i = 0; i < course_list.size(); i++) {
 				%>
-				<div class="panel-heading  w3-border w3-round-large">
+				<div class="panel-heading" style="background-color: #d8a6b3">
 
 					<h4 class="panel-title">
 
@@ -74,21 +74,15 @@
 				<div id="collapse<%=course_list.get(i).getCode()%>"
 					class="panel-collapse collapse">
 					<h2 style="margin-left: 0.5%;"><%=course_list.get(i).getName()%>
-					<img src="./img/good.png" class="w3-right right-margin" style="width : 10%" id="good">
+					<img id="Good" src="./img/Miracom_CI_BK.png" class="w3-right right-margin" style="width : 0%">
 					</h2>
 					<p style="margin-left: 1%;"><%=course_list.get(i).getContents()%></p>
 					<div class="panel-body flex flex-align-center flex-justify-center">
 						<div class="width-50 flex flex-wrap">
-
-							<%
-								for (int j = 0; j < detail_list.get(i).size(); j++) {
-							%>
-							<div class="flex flex-justify-center flex-align-center"
-								style="width: 65px;">
-								<span
-									class="glyphicon glyphicon-chevron-right logo w3-text-grey"></span>
-							</div>
-							<!-- <div class="panel-body"> -->
+						<%
+							for (int j = 0; j < detail_list.get(i).size(); j++) {
+						%>
+						<!-- <div class="panel-body"> -->
 							<div class="w3-card-4 w3-margin"
 								style="width: 24%; min-width: 200px; margin-bottom: 3%;">
 								<div class="w3-padding-small w3-opacity w3-hover-opacity-off"
@@ -103,7 +97,7 @@
 									class="w3-container w3-center flex flex-align-center flex-justify-center"
 									style="height: 50px;"><%=detail_list.get(i).get(j).getName()%></div>
 							</div>
-
+							
 							<!-- Modal -->
 							<div class="modal fade"
 								id="myModal<%=detail_list.get(i).get(j).getCode()%>"
@@ -126,17 +120,38 @@
 									</div>
 								</div>
 							</div>
-							<%
-								}
-							%>
+						<%
+								latitude += detail_list.get(i).get(j).getLatitude();
+								longitude += detail_list.get(i).get(j).getLongitude();
+							}
+						%>
 						</div>
 						<%-- latitude: <%=latitude/detail_list.get(i).size() %><br>
 						longitude: <%=longitude/detail_list.get(i).size() %> --%>
 						<div class="width-50 flex flex-align-center flex-justify-center">
-							<div id="map<%=course_list.get(i).getCode()%>"
-								style="width: 90vh; height: 60vh;"></div>
+							<div id="map<%=course_list.get(i).getCode() %>" style="width: 90vh; height: 60vh;"></div>
 						</div>
-
+						<script type="text/javascript">
+							var map = new naver.maps.Map('map<%=course_list.get(i).getCode() %>',
+							{
+								center : new naver.maps.LatLng(<%=latitude/detail_list.get(i).size() %>, <%=longitude/detail_list.get(i).size() %>),
+								zoom : 9
+							});
+					<%
+						latitude = 0.0; longitude = 0.0;
+						
+						for (Restaurant rest : detail_list.get(i)) {
+					%>
+							var marker = new naver.maps.Marker({
+								position : new naver.maps.LatLng(<%=rest.getLatitude() %>
+										, <%=rest.getLongitude() %>),
+								
+								map : map
+							});
+					<%
+						}
+					%>
+						</script>
 					</div>
 				</div>
 				<%
@@ -151,70 +166,36 @@
 	<%-- <!-- Footer -->
 	<jsp:include page="footer.jsp" /> --%>
 	<script>
-	$(".panel-body > div:first-child > div:first-child").remove();
-	$(document).ready(
-			function() {
-				$("#accordion > div:first-child > div:nth-child(2)").addClass("in");
-
-				 $('#good').click(function(){ 
-					   var pk = $(this).prop('code') // 클릭한 요소의 attribute 중 name의 값을 가져온다. 
-					   $.ajax({ 
-					       url: "${pageContext.request.contextPath}/good.do", // 통신할 url을 지정한다. 
-					       method :"get",
-					       data: {
-					    	   'code': pk, // 서버로 데이터를 전송할 때 이 옵션을 사용한다. 
-					       },
-					       dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다. 
-					       success: function(jsonObj){ 
-					         // 요청이 성공했을 경우 좋아요/싫어요 개수 레이블 업데이트 
-					         alert(jsonObj.flag);
-					         //$('#like_count'+ pk).html("count : "+ response.like_count); 
-					       }, 
-					       error:function(error){ 
-					         // 요청이 실패했을 경우 
-					         alert("error");
-					       }
-					   }); 
+		$(document).ready(function() {
+			$("#accordion > div:first-child > div:nth-child(2)").addClass("in");
+			 // 좋아요 버튼 처리 
+			 // 버튼 클릭 > ajax통신 (like url로 전달) > views의 like 메소드에서 리턴하는 값 전달받기 > 성공시 콜백 호출 
+			 $('#good').click(function(){ 
+			   var pk = $(this).prop('code') // 클릭한 요소의 attribute 중 name의 값을 가져온다. 
+			   $.ajax({ 
+			       url: "${pageContext.request.contextPath}/good.do", // 통신할 url을 지정한다. 
+			       method :"get",
+			       data: {
+			    	   'code': pk, // 서버로 데이터를 전송할 때 이 옵션을 사용한다. 
+			       },
+			       dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다. 
+			       success: function(jsonObj){ 
+			         // 요청이 성공했을 경우 좋아요/싫어요 개수 레이블 업데이트 
+			         alert(jsonObj.flag);
+			         //$('#like_count'+ pk).html("count : "+ response.like_count); 
+			       }, 
+			       error:function(error){ 
+			         // 요청이 실패했을 경우 
+			         alert("error");
+			       }
+			   }); 
+			 }) 
 				
-				});
-			});
-	
-	
-	function selectTheme(obj) {
-		location.href = "course.do?theme="
-				+ encodeURI($(obj).text(), "UTF-8");
-	};
-
-	<%for (int i = 0; i < course_list.size(); i++) {
-				// 중심위치 잡기
-				for (Restaurant rest : detail_list.get(i)) {
-					latitude += rest.getLatitude();
-					longitude += rest.getLongitude();
-				}%>
-	var map = new naver.maps.Map('map<%=course_list.get(i).getCode()%>', {
-			center : new naver.maps.LatLng(
-	<%=latitude / detail_list.get(i).size()%>
-		,
-	<%=longitude / detail_list.get(i).size()%>
-		),
-			zoom : 9
 		});
-	<%latitude = 0.0;
-				longitude = 0.0;
-
-				for (Restaurant rest : detail_list.get(i)) {%>
-		var marker = new naver.maps.Marker({
-			position : new naver.maps.LatLng(
-	<%=rest.getLatitude()%>
-		,
-	<%=rest.getLongitude()%>
-		),
-
-			map : map
-		});
-	<%}
-			}%>
-		
+		function selectTheme(obj) {
+			location.href = "course.do?theme="
+					+ encodeURI($(obj).text(), "UTF-8");
+		};
 	</script>
 </body>
 </html>
