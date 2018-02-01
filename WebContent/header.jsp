@@ -23,8 +23,11 @@
 
 <!-- Web Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/hanna.css">
+
 <style>
-body,h1,h2,h3,h4,h5 {font-family: "Allerta Stencil", Sans-serif;}
+header {font-family: "Allerta Stencil", Sans-serif;}
+body,h1,h2,h3,h4,h5 {font-family: 'Hanna', fantasy;}
 </style>
 
 <style>
@@ -80,7 +83,7 @@ body {padding-right:0!important;}
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top bg-tawny-port w3-padding-16 flex flex-align-center">
-	<span onclick="location.href='recommend.do'" class="cursor-pointer logo w3-cell-middle w3-text-white w3-left">오늘 뭐하세요?</span>
+	<span onclick="location.href='recommend.do'" class="cursor-pointer logo w3-cell-middle w3-text-white w3-left">오늘 뭐하세요~?</span>
 	
 	<span class="flex-grow"></span>
 	
