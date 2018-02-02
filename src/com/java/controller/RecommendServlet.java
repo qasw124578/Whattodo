@@ -76,7 +76,6 @@ public class RecommendServlet extends HttpServlet {
 			temperature = (Double)weatherFull.get("temp") - 273.0;
 			temperature = Math.round(temperature*10)/10.0;
 			
-			System.out.println("icon: " + icon);
 			if (icon.equals("01d") || icon.equals("01n") || icon.equals("02d") || icon.equals("02n")) {
 				icon = "wi-day-sunny";
 				weatherCondition = "¸¼À½";

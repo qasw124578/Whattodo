@@ -84,7 +84,7 @@ public class CourseDAO2 {
 		
 		if (theme != null)
 			sql += " and theme = ?";
-		
+		sql += " ORDER BY GOOD DESC";
 		Course course1 = null;
 		try {
 			conn = DBUtil.getConnection();

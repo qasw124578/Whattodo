@@ -38,7 +38,6 @@ public class CourseDAO {
 				
 				int index = (int)Math.floor(Math.random() * courses.size());
 				courseCode = courses.get(index);
-				System.out.println(index);
 			}
 			
 			

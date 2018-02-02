@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.java.model.dao.GoodDAO;
+import com.java.model.vo.User;
 
 /**
  * Servlet implementation class goodServlet
@@ -19,15 +20,21 @@ public class GoodServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int flag = 1;
+		int flag;
+		int goodCount = -1;
 		GoodDAO goodDAO = new GoodDAO();
 		
 		String code = request.getParameter("code");
-		String id = (String)request.getSession().getAttribute("id");
+		User user = (User)request.getSession().getAttribute("user");
+		String id = user.getUserID();
 		flag = goodDAO.getFlag(code, id);
 		
-		System.out.println("GoodServlet doGet");
+		// flag: (1)Success, (0)Denied, (-1)Failed
+		if (flag == 1) {
+			goodCount = goodDAO.getGoodCount(code);
+		}
 		request.setAttribute("flag", flag);
+		request.setAttribute("count", goodCount);
 		request.getRequestDispatcher("/result.jsp").forward(request, response);		
 		return;
 	}
